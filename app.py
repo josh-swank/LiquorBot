@@ -1,3 +1,6 @@
+# TODO: Logging
+
+
 import bot
 from flask import Flask
 
@@ -10,17 +13,17 @@ app = Flask(__name__)
 
 @app.route("/install", methods=["GET"])
 def pre_install():
-    pass
+    raise NotImplementedError()
 
 
 @app.route("/thanks", methods=["GET", "POST"])
 def thanks():
-    pass
+    raise NotImplementedError()
 
 
 @app.route("/listening", methods=["GET", "POST"])
 def hears():
-    pass
+    raise NotImplementedError()
 
 
 if __name__ == '__main__':
