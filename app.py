@@ -30,7 +30,8 @@ def hears():
 
     # Slack URL Verification
     if 'challenge' in slack_event:
-        raise NotImplementedError()
+        return make_response(slack_event['challenge'],
+                200, {'content_type': 'application/json'})
 
     # Slack Token Verification
     if pyBot.verification != slack_event.get('token'):
