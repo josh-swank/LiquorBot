@@ -35,7 +35,9 @@ def hears():
 
     # Slack Token Verification
     if pyBot.verification != slack_event.get('token'):
-        raise NotImplementedError()
+        message = "Invalid Slack verification token: %s\npyBot has: %s\n\n" \
+                % (slack_event['token'], pyBot.verification)
+        make_response(message, 403, {'X-Slack-No-Retry': 1})
     
     # Process Incoming Events from Slack
     if 'event' in slack_event:
