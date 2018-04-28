@@ -20,7 +20,9 @@ def pre_install():
 
 @app.route("/thanks", methods=["GET", "POST"])
 def thanks():
-    raise NotImplementedError()
+    code_arg = request.args.get('code')
+    pyBot.auth(code_arg)
+    return render_template("thanks.html")
 
 
 @app.route("/listening", methods=["GET", "POST"])
