@@ -11,7 +11,17 @@ app = Flask(__name__)
 
 
 def _handle_event(event_type, slack_event):
-    raise NotImplementedError()
+
+
+    # TODO: Remove debug code
+    # DEBUG
+    print("event_type: %s" % event_type)
+    print(slack_event)
+    # END DEBUG
+
+
+    message = "Unable to handle event %s" % event_type
+    return make_response(message, 200, {'X-Slack-No-Retry': 1})
 
 
 @app.route("/install", methods=["GET"])
