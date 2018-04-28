@@ -10,6 +10,10 @@ pyBot = bot.Bot()
 app = Flask(__name__)
 
 
+def _handle_event(event_type, slack_event):
+    raise NotImplementedError()
+
+
 @app.route("/install", methods=["GET"])
 def pre_install():
     client_id = pyBot.oauth['client_id']
@@ -41,7 +45,8 @@ def hears():
     
     # Process Incoming Events from Slack
     if 'event' in slack_event:
-        raise NotImplementedError()
+        event_type = slack_event['event']['type']
+        return _handle_event(event_type, slack_event)
 
     return make_response("No event in Slack request",
             404, {'X-Slack-No-Retry': 1})
