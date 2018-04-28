@@ -6,8 +6,6 @@ from flask import Flask, render_template
 
 
 pyBot = bot.Bot()
-slack = pyBot.client
-
 app = Flask(__name__)
 
 
