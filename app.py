@@ -20,10 +20,9 @@ def _handle_event(event_type, slack_event):
         matches = re.findall(word_pattern, message)
 
         if len(matches) > 0:
-            # TODO: DEBUG
-            print("user_id: " + user_id)
-            print("%s?! I HARDLY EVEN KNOW 'ER!" % matches[0].upper())
-            # END DEBUG
+            response_text = "%s?! I HARDLY EVEN KNOW 'ER!" % matches[0].upper()
+            pyBot.post_message(slack_event['event'].get('channel'), response_text)
+            return make_response("Message response posted", 200)
 
     message = "Unable to handle event %s" % event_type
     return make_response(message, 200, {'X-Slack-No-Retry': 1})
