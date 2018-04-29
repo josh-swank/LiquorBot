@@ -4,21 +4,26 @@
 import bot
 from flask import Flask, make_response, render_template, request
 import json
+import re
 
 
 pyBot = bot.Bot()
 app = Flask(__name__)
 
+word_pattern = re.compile("\\b[a-z]+(?:qu|[^aeiou])[eo]r\\b")
+
 
 def _handle_event(event_type, slack_event):
+    if event_type == 'message' and slack_event['event'].get('text'):
+        user_id = slack_event['event'].get('user')
+        message = slack_event['event'].get('text')
+        matches = re.findall(word_pattern, message)
 
-
-    # TODO: Remove debug code
-    # DEBUG
-    print("event_type: %s" % event_type)
-    print(slack_event)
-    # END DEBUG
-
+        if len(matches) > 0:
+            # TODO: DEBUG
+            print("user_id: " + user_id)
+            print("%s?! I HARDLY EVEN KNOW 'ER!" % matches[0].upper())
+            # END DEBUG
 
     message = "Unable to handle event %s" % event_type
     return make_response(message, 200, {'X-Slack-No-Retry': 1})
