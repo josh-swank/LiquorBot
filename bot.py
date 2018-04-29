@@ -36,3 +36,6 @@ class Bot(object):
                 'bot_token': auth_response['bot']['bot_access_token']}
 
         self.client = SlackClient(authed_teams[team_id]['bot_token'])
+
+    def post_message(self, channel, text):
+        pass
